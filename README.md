@@ -7,7 +7,7 @@ Todo
 
 - Clone git repository.
 ```
-git clone https://github.com/BSaaber/#TODO.git
+git clone git@github.com:BSaaber/vue-falcon-mongo-template.git
 ```
 - Enter project directory.
 ```

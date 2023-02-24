@@ -1,0 +1,36 @@
+version: '3'
+
+services:
+  backend:
+    build: ./backend
+    ports: # close in production
+      - '3000:3000'
+    volumes:
+      - './backend/.:/code'
+    depends_on:
+      - mongodb
+    environment:
+      - MONGO_USERNAME=${MONGO_ROOT_USERNAME}
+      - MONGO_PASSWORD=${MONGO_ROOT_PASSWORD}
+      - MONGO_PORT=${MONGO_PORT}
+
+  frontend:
+    build:
+      context: ./frontend
+    ports:
+      - '80:80'
+    volumes:
+      - './frontend:/code'
+    depends_on:
+      - backend
+
+  mongodb:
+    image: mongo:latest
+    restart: always
+    ports: # close in production
+      - '${MONGO_PORT}:${MONGO_PORT}'
+    volumes:
+      - ./.mongo:/data/db
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=${MONGO_ROOT_USERNAME}
+      - MONGO_INITDB_ROOT_PASSWORD=${MONGO_ROOT_PASSWORD}

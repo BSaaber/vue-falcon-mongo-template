@@ -1,0 +1,5 @@
+.mongo
+frontend/node_modules
+.env
+.idea
+backend/app/__pycache__
